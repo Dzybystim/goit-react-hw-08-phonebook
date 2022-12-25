@@ -2,7 +2,11 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 //import { fetchingInProgress, fetchingSuccess, fetchingError } from "./contactsSlice"
 
-axios.defaults.baseURL = "https://6395ed0c90ac47c68077e61f.mockapi.io/goit-react-hw-07-phonebook";
+//axios.defaults.baseURL = "https://6395ed0c90ac47c68077e61f.mockapi.io/goit-react-hw-07-phonebook";
+
+axios.defaults.baseURL = "https://connections-api.herokuapp.com";
+
+
 
 //export const fetchContacts = () => async dispatch => {
 //    try {
@@ -13,6 +17,20 @@ axios.defaults.baseURL = "https://6395ed0c90ac47c68077e61f.mockapi.io/goit-react
 //        dispatch(fetchingError(error.message))
 //    }
 //}
+
+export const register = createAsyncThunk('auth/register', async credentials => {
+    try {
+    const {data} = await axios.post('/users/signup', credentials);
+    return data;
+    } catch(error) {
+    console.log(credentials)
+    console.error('Ошибка в operations auth/register')
+    console.log(error)
+    }
+})
+
+
+
 
 export const fetchContacts = createAsyncThunk('contacts/fetchAll', async (_, thunkAPI) => {
     try{
@@ -41,3 +59,5 @@ export const deleteContact = createAsyncThunk('contacts/deleteContact', async(co
         return thunkAPI.rejectWithValue(error.message);
     }
 })
+
+
