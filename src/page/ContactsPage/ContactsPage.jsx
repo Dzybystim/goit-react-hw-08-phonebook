@@ -2,12 +2,18 @@ import InputField from "components/InputField/InputField";
 import Filter from "components/Filter/Filter";
 import Contacts from "components/Contacts/Contacts";
 import {selectIsLoading, selectError} from "../../redux/selectors"
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import { fetchContacts } from "../../redux/operations";
+import { useEffect } from "react";
 
 export default function ContactsPage() {
+    const dispatch = useDispatch();
 
     const isLoading = useSelector(selectIsLoading)
     const error = useSelector(selectError)
+    
+      useEffect(() => { dispatch(fetchContacts());}, [dispatch])
+
 
     return <>
            <InputField title='Phonebook' titleInputOne='Name' titleInputTwo='Number'/>

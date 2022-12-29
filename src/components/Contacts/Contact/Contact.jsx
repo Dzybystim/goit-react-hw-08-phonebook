@@ -13,7 +13,7 @@ export default function Contact({contact}) {
     }
     
     return <ContactStyled>
-            <p>{contact.name}: {contact.phone}</p>
+            <p>{contact.name}: {contact.number}</p>
             <ContactStyledButton type="button" onClick={handleClick} > Delete</ContactStyledButton>
            </ContactStyled>
     
@@ -23,6 +23,6 @@ Contact.propTypes = {
     contact: PropTypes.shape({
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        phone: PropTypes.string.isRequired,
+        number: PropTypes.string.isRequired,
       }) 
 }
