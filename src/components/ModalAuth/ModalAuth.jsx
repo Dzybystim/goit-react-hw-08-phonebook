@@ -9,15 +9,10 @@ export default function ModalAuth({children, open, setOpen}) {
 const element = useMemo(() => document.createElement("div"), []);
 
 
-
 const onClose = (event) => {
-    if(event.target.nodeName === "DIV") {
+    if(event.target.nodeName === "SECTION") {
         setOpen(false)
     }}
-
-const onCloseKey = (event) => {
-    console.log(event)
-}
 
 
 useEffect(() => {
@@ -32,10 +27,9 @@ useEffect(() => {
 })
 
 
-
 if(open) {
     return createPortal(
-        <ModalBackground onClick={onClose} onKeyDown={onCloseKey}>
+        <ModalBackground onClick={onClose} >
             <ModalCard>{children}</ModalCard>
         </ModalBackground>,
         element

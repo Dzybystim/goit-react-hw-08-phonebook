@@ -13,9 +13,9 @@ import { useState } from "react"
 
 const WelcomePage = lazy(() => import('../../page/WelcomePage/WelcomePage'));
 const ContactsPage = lazy(() => import('../../page/ContactsPage/ContactsPage'));
-const RegisterPage = lazy(() => import('../../page/RegisterPage/RegisterPage'));
-const LoginPage = lazy(() => import('../../page/LoginPage/LoginPage'));
-
+const RegisterPageAlt = lazy(() => import('../../page/RegisterPageAlt/RegisterPageAlt'));
+const SignIn = lazy(() => import('../../page/LoginPageAlt/LoginPageAlt'));
+const NotFound = lazy(() => import('../NotFound/NotFound'))
 
 
 export const App = () => {
@@ -38,16 +38,18 @@ useEffect(() => {
 
            <Route path="/login" element={<PublicRoute redirectTo="/" component={ 
            <ModalAuth open={open} setOpen={setOpen}> 
-             <LoginPage /> 
-           </ModalAuth>} />} />
+             <SignIn setOpen={setOpen} /> 
+           </ModalAuth>} openModal={open} />} />
 
 
            <Route path="/register" element={<PublicRoute redirectTo="/" component={
            <ModalAuth open={open} setOpen={setOpen}>
-            <RegisterPage />
-            </ModalAuth>} />} />
+            <RegisterPageAlt setOpen={setOpen} />
+            </ModalAuth>} openModal={open} />} />
 
            <Route path="/contacts" element={<PrivateRoute redirectTo="/register" component={<ContactsPage />} />} />
+
+           <Route path="*" element={<NotFound />} />
            </Routes>
            </Suspense>
             </>

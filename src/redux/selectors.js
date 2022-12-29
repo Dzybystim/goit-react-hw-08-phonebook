@@ -14,3 +14,5 @@ export const getUserEmail = state => state.auth.user.email;
 
 export const getRefreshing = state => state.auth.isRefreshing;
 
+export const getModalOpen = state => state.auth.isModalOpen
+

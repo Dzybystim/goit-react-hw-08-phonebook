@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ModalBackground = styled.div`
+export const ModalBackground = styled.section`
 position: fixed;
 top: 0;
 left: 0;
@@ -14,7 +14,7 @@ justify-content: center;
 align-items: center;
 `
 
-export const ModalCard = styled.section`
+export const ModalCard = styled.div`
 background: white;
 padding: 25px;
 border: 3px solid black;

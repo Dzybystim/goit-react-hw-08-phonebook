@@ -3,7 +3,8 @@ import { getIsLoggedIn } from "../../redux/selectors"
 import { useSelector } from "react-redux";
 
 
-export const PublicRoute = ({ component: Component, redirectTo = '/' }) => {
+export const PublicRoute = ({ component: Component, redirectTo = '/' , openModal}) => {
     const isLoggedIn = useSelector(getIsLoggedIn);
-    return isLoggedIn ? <Navigate to={redirectTo} /> : Component;
+
+    return isLoggedIn|| !openModal ? <Navigate to={redirectTo} /> : Component;
 }
