@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import Notiflix from 'notiflix'
 
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
@@ -20,7 +21,7 @@ export const register = createAsyncThunk('auth/register', async credentials => {
     token.set(data.token);
     return data;
     } catch(error) {
-    console.error('Ошибка в operations auth/register')
+    Notiflix.Notify.warning('Account already registered');
     console.log(error)
     }
 })
@@ -31,7 +32,7 @@ export const logIn = createAsyncThunk('auth/login', async credentials => {
     token.set(data.token);
     return data
     } catch(error) {
-    console.error('Ошибка в operations auth/login')
+    Notiflix.Notify.warning('Wrong login or password');
     console.log(error)
     }
 })
@@ -41,6 +42,7 @@ export const logOut = createAsyncThunk('auth/logout', async() => {
     await axios.post('/users/logout')
     token.unset()
     }catch(error){
+    Notiflix.Notify.warning('Impossible logout');
     console.error('Ошибка в operations auth/logout')
     console.log(error)
     }
@@ -83,6 +85,7 @@ export const addContact = createAsyncThunk('contacts/addContact', async (text, t
         const response = await axios.post("/contacts", {name: text.name, number: text.phone});
         return response.data;
     } catch(error) {
+        Notiflix.Notify.warning('Impossible addContact');
         return thunkAPI.rejectWithValue(error.message);
     }
 })
@@ -92,8 +95,17 @@ export const deleteContact = createAsyncThunk('contacts/deleteContact', async(co
         const response = await axios.delete(`/contacts/${contactId}`)
         return response.data;
     } catch(error) {
+        Notiflix.Notify.warning('Impossible deleteContact');
         return thunkAPI.rejectWithValue(error.message);
     }
 })
 
-
+export const changeContact = createAsyncThunk('contacts/changeContact', async(text, thunkAPI) => {
+    try{
+       const response = await axios.patch(`/contacts/${text.id}`, {name: text.name, number: text.phone});
+       return response.data;
+    } catch(error) {
+        Notiflix.Notify.warning('Impossible changeContact');
+        return thunkAPI.rejectWithValue(error.message);
+    }
+})

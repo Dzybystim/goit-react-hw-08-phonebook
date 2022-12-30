@@ -10,6 +10,7 @@ import {PublicRoute} from "components/PublicRoute/PublicRoute"
 import {getRefreshing} from "../../redux/selectors"
 import ModalAuth from "components/ModalAuth/ModalAuth"
 import { useState } from "react"
+import { Loader } from "../Loader/Loader"
 
 const WelcomePage = lazy(() => import('../../page/WelcomePage/WelcomePage'));
 const ContactsPage = lazy(() => import('../../page/ContactsPage/ContactsPage'));
@@ -29,10 +30,10 @@ useEffect(() => {
 
   return (
         <Layout>
-          {isRefreshing ? (<h1>Загрузчик</h1>) : (
+          {isRefreshing ? (<Loader />) : (
             <>
            <AppBar setOpen={setOpen}/>
-           <Suspense fallback={<div>Loading...</div>}>  
+           <Suspense fallback={<Loader />}>  
            <Routes>
            <Route path="/" element={<WelcomePage />} />
 
@@ -45,7 +46,7 @@ useEffect(() => {
            <Route path="/register" element={<PublicRoute redirectTo="/" component={
            <ModalAuth open={open} setOpen={setOpen}>
             <RegisterPageAlt setOpen={setOpen} />
-            </ModalAuth>} openModal={open} />} />
+           </ModalAuth>} openModal={open} />} />
 
            <Route path="/contacts" element={<PrivateRoute redirectTo="/register" component={<ContactsPage />} />} />
 

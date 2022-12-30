@@ -105,7 +105,7 @@ export default function RegisterPageAlt ({setOpen}) {
               type="password"
               id="password"
               autoComplete="current-password"
-              minlength="6"
+              minLength="6"
               title="Enter password"
             />
             <FormControlLabel
